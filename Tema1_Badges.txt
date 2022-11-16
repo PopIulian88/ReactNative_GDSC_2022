@@ -1,0 +1,105 @@
+import { View, StyleSheet, Text, Image,} from 'react-native';
+
+export default function App() {
+
+  return (
+    <View style = {styles.container}>
+      <View style = {styles.box}>
+        <View style={styles.upBox}>
+          <View style = {styles.bar}></View>
+          <Image
+            style={styles.photo}
+            source={require('./DSC_9808.jpg')}
+      />
+        </View>
+        <View style = {styles.downBox}>
+          <Text style = {styles.name}>Iulian</Text>
+          <Text style = {styles.firstName}>Pop</Text>
+          <Image
+            style = {styles.logo}
+            source= {{uri: "https://media-exp1.licdn.com/dms/image/C4E0BAQELxZTapxHMjw/company-logo_200_200/0/1629981260188?e=2147483647&v=beta&t=JuYaozY7GBN3BEKNPSm1RdBM6_GnFJBuGYQD5PPm0A8",}}
+          />
+        </View>
+      </View>
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+    container: {
+      justifyContent: 'center',
+      width: '100%',
+      height: '100%',
+    },
+    
+    box: {
+      width: '60%',
+      height: '50%',
+      backgroundColor: 'white',
+      alignSelf: 'center',
+    },
+
+    upBox: {
+      flex: 1,
+      borderColor: "black",
+      borderTopLeftRadius: 40,
+      borderTopRightRadius: 40,
+      paddingTop: 20,
+      backgroundColor: '#2114b5',
+
+      shadowColor: "#000",
+      elevation: 10
+    },
+
+    downBox: {
+      flex: 1.1,
+      borderColor: "black",
+      borderBottomLeftRadius: 40,
+      borderBottomRightRadius: 40,
+      paddingTop: 0,
+      paddingBottom: 0,
+      backgroundColor: 'white',
+      justifyContent: 'flex-start',
+
+      shadowColor: "#000",
+      elevation: 10,
+    },
+
+    photo: {
+      width: 50,
+      height: 50,
+      alignSelf: 'center',
+      justifyContent: 'center',
+      marginTop: 30,
+      padding: 50,
+      borderRadius: 50,
+    },
+
+    firstName: {
+      fontSize: 25,
+      textAlign: 'center',
+      fontWeight: 'bold',
+    },
+
+    name: {
+      fontSize: 25,
+      textAlign: 'center',
+    },
+
+    logo: {
+      height: 50,
+      width: 50,
+      alignSelf: 'center',
+      padding: 40,
+      borderRadius: 50,
+    },
+
+    bar: {
+      border: 30,
+      height: '15%',
+      width: '50%',
+      backgroundColor: 'white',
+      alignSelf: 'center',
+      borderRadius: 50,
+    },
+});

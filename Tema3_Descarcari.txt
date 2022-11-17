@@ -1,0 +1,80 @@
+import {View, Text, StyleSheet, ScrollView, Image, TouchableOpacity} from 'react-native';
+
+export default function App() {
+
+  return (
+      <ScrollView style = {styles.container}>
+          <Spacer/>
+          <FileCard name = "Recapitulare functii" extension="Tabel recapitulare.pdf" size = "5MB" category = "PDF"/>
+          <Spacer/>
+          <FileCard name = "React native logo" extension="React logo.jpg" size = "69Kb" category = "JPG"/>
+          <Spacer/>
+          <FileCard name = "Schedule" extension="MySchedule.xlsx" size = "10MB" category = "XLSX"/>
+          <Spacer/>
+          <FileCard name = "Shoping List" extension="List.txt" size = "1MB" category = "TXT"/>
+      </ScrollView>
+  );
+}
+
+function FileCard({name, extension, size, category}) {
+
+    return (
+        <View style = {styles.box}>
+            <View style = {styles.leftView}>
+                <Text style = {{color: '#00fa79', fontSize: 12}}>{category} | {size}</Text>
+                <Text style = {{fontWeight: 'bold', fontSize: 18}}>{name}</Text>
+                <Text>{extension}</Text>
+            </View>
+            <View style = {styles.rightView}>
+                <TouchableOpacity onPress={() => {alert("Download start")}} style = {styles.button}>
+                    <Image source={{uri: "https://image.shutterstock.com/image-vector/download-icon-vector-illustration-logo-260nw-1357166951.jpg"}} style = {styles.downloadImage}/>
+                </TouchableOpacity>
+            </View>
+        </View>
+    );
+}
+
+function Spacer({height1 = 50}) {
+
+    return (
+        <View style = {{height: height1}}/>
+    );
+}
+
+const styles = StyleSheet.create({
+
+    container: {
+        flex: 1,
+        backgroundColor: '#cccccc',
+    },
+
+    box: {
+        backgroundColor: 'white',
+        height: 120,
+        width: "95%",
+        alignSelf: 'center',
+        borderRadius: 10,
+        flexDirection: 'row',
+        padding: 20,
+    },
+    leftView: {
+        height: "100%",
+        width: "80%",
+        justifyContent: 'center',
+    },
+
+    rightView: {
+        height: "100%",
+        width: "20%",
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+
+    downloadImage: {
+        height: 60,
+        width: 60,
+        borderRadius: 50,
+        borderWidth: 1,
+        borderColor: '#00fa79',
+    },
+});

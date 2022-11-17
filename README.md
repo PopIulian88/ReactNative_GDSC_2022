@@ -15,3 +15,6 @@
 
 ## Homework 2
 <img src="./Image/Tema2.jpeg" width="288" height="512">
+
+## Homework 3
+<img src="./Image/Tema3.jpeg" width="288" height="512">

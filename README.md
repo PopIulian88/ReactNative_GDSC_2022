@@ -25,10 +25,6 @@
 
 ## Workshop 3
 
-### Screens setup
-Firstly, check the screen under the `/screens` directory. There you'll see `F1VideosScreen`. In order for this one to display properly, you should run:
-`expo install react-native-webview` & `npm install react-native-youtube-iframe`. The library used is [React Native Youtube-iframe](https://lonelycpp.github.io/react-native-youtube-iframe/) so make sure you check their documentation for more info.
-
 ### Navigation setup
 In `App.js`, under the `App` component, you should see three different navigations: Stack, Tab & Drawer. When you run the app, make sure to let just one uncommented.
 

@@ -53,4 +53,4 @@
 ```
 
 ## Homework 3
-<img src="./Image/Tema4gif.gif" width="288" height="512">
+<img src="./Image/Tema4gif.gif" width="288" height="550">

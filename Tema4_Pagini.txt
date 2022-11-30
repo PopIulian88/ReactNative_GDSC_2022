@@ -1,0 +1,328 @@
+import { Button, View, StyleSheet, Text, Image, TouchableOpacity } from 'react-native';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import { NavigationContainer } from '@react-navigation/native';
+import {createNativeStackNavigator} from "@react-navigation/native-stack";
+import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
+import Icon from 'react-native-vector-icons/FontAwesome';
+
+const Stack = createNativeStackNavigator();
+const Drawer = createDrawerNavigator();
+const Tab = createBottomTabNavigator();
+
+function HomeScreen({ navigation }) {
+    return (
+        <View style={styles.homeScreen}>
+            <Text style={{fontWeight: "bold", fontSize: 32}}>Welcome😍</Text>
+            <Text style={{textAlign: 'center', fontStyle: "italic"}}>This awesome app will present you details
+                about cars and books!</Text>
+        </View>
+    );
+}
+
+//Cars layer
+
+function Cars() { //Base
+    return (
+        <Tab.Navigator tabBarOptions={styles.tabBarEdit}>
+            <Tab.Screen name={"Mustang"} component={Mustang} options={styles.carTab}/>
+            <Tab.Screen name={"Dacia"} component={Dacia} options={styles.carTab}/>
+            <Tab.Screen name={"Dodge"} component={Dodge} options={styles.carTab}/>
+        </Tab.Navigator>
+    );
+}
+
+function CarSpecs({name, photo, fuel, topSpeed, acceleration, weight, gearBox}) {
+    return (
+        <View style={styles.CarScreen}>
+            <View style={{height: "30%", width: "100%"}}>
+                <Text style={{alignSelf: 'flex-start', fontSize: 20, fontWeight: 'bold'}}>{name}</Text>
+                <Spacer height={"1%"}/>
+                <Image source={{uri: photo}} style={styles.carPhoto}/>
+            </View>
+            <Spacer height={"20%"}/>
+            <View style={styles.carSpecs}>
+                <View style={styles.carSpecsIcon}>
+                    <Image source={require("./Image/fuel.png")} style={{height: 30, width: 30}}/>
+                    <Spacer height={"20%"}/>
+                    <Image source={require("./Image/speed.png")} style={{height: 30, width: 30}}/>
+                    <Spacer height={"20%"}/>
+                    <Image source={require("./Image/acceleration.png")} style={{height: 30, width: 30}}/>
+                    <Spacer height={"20%"}/>
+                    <Image source={require("./Image/weight.png")} style={{height: 30, width: 30}}/>
+                    <Spacer height={"20%"}/>
+                    <Image source={require("./Image/gearbox.png")} style={{height: 30, width: 30}}/>
+                </View>
+                <View style={{alignItems: "center"}}>
+                    <Text style={{fontSize: 20}}>Fuel</Text>
+                    <Spacer height={"5%"}/>
+                    <Text style={{fontSize: 20}}>Top Speed</Text>
+                    <Spacer height={"5%"}/>
+                    <Text style={{fontSize: 20}}>Acceleration</Text>
+                    <Spacer height={"5%"}/>
+                    <Text style={{fontSize: 20}}>Weight</Text>
+                    <Spacer height={"5%"}/>
+                    <Text style={{fontSize: 20}}>Gearbox</Text>
+                </View>
+                <View style={{alignItems: "flex-end"}}>
+                    <Text style={{fontSize: 20}}>{fuel}</Text>
+                    <Spacer height={"5%"}/>
+                    <Text style={{fontSize: 20}}>{topSpeed}</Text>
+                    <Spacer height={"5%"}/>
+                    <Text style={{fontSize: 20}}>{acceleration}</Text>
+                    <Spacer height={"5%"}/>
+                    <Text style={{fontSize: 20}}>{weight}</Text>
+                    <Spacer height={"5%"}/>
+                    <Text style={{fontSize: 20}}>{gearBox}</Text>
+                </View>
+            </View>
+
+        </View>
+    );
+}
+
+function Mustang() {
+    return (
+      <CarSpecs name={"Mustang Shelby"} photo={"https://thumbor.forbes.com/thumbor/fit-in/960x/https://www.forbes.com/wheels/wp-content/uploads/2021/07/2021_ShelbyGT500_1.jpg"}
+            fuel={"Gasoline"} topSpeed={"180 mph"} acceleration={"3.4 s"} weight={"1,897 kg"}
+                gearBox={"6 Automatic"}
+      />
+    );
+}
+
+function Dacia() {
+    return (
+        <CarSpecs name={"Dacia Logan"} photo={"https://24auto.ro/wp-content/uploads/2021/04/Dacia-Logan-Prior-Design-2.jpg"}
+                  fuel={"GPL"} topSpeed={"150 km/h"} acceleration={"10 s"} weight={"1,360 kg"}
+                  gearBox={"5 Manual"}
+        />
+    );
+}
+
+function Dodge() {
+    return (
+        <CarSpecs name={"Dodge Challenger"} photo={"https://www.autocar.co.uk/sites/autocar.co.uk/files/dodge-111challenger-hellcat-2014-020_0.jpg"}
+                  fuel={"Gasoline"} topSpeed={" 203 mph"} acceleration={"3.3 s"} weight={"1,750 kg"}
+                  gearBox={"6 Manual"}
+        />
+    );
+}
+
+// Books layer
+function Books() {
+    return (
+      <Stack.Navigator>
+          <Stack.Screen name={"BookPresent"} component={BookPresent} options={{headerShown: false}}/>
+          <Stack.Screen name={"RDPD"} component={RDPD} options={{headerShown: false}}/>
+          <Stack.Screen name={"Meditation"} component={Meditation} options={{headerShown: false}}/>
+      </Stack.Navigator>
+
+    );
+}
+
+function BookPresent({navigation}) {
+    return (
+        <View style={styles.bookMain}>
+            <Spacer/>
+            <BookBox
+                photo={"https://cdn.dc5.ro/img-prod/25725574-0.jpeg"}
+                name={"Rich Dad Poor Dad"}
+                author={"Robert Kiyosaki"}
+                goTo={"RDPD"}
+                navigation={navigation}
+            />
+
+            <Spacer></Spacer>
+
+            <BookBox
+                photo={"https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1555957369l/45269616._SY475_.jpg"}
+                name={"Meditation"}
+                author={"Marcus Aurelius"}
+                goTo={"Meditation"}
+                navigation={navigation}
+            />
+        </View>
+    );
+}
+
+
+function BookBox({navigation, goTo, photo, name, author}) {
+    return (
+      <TouchableOpacity style={styles.bookBoxEdit} onPress={() => {navigation.navigate(goTo)}}>
+          <View style={styles.bookBoxPhoto}>
+              <Image
+                  style={styles.bookPhoto}
+                  source={{uri: photo}}
+              />
+          </View>
+          <View style={styles.bookBoxDescription}>
+              <Text style={{fontSize: 16, fontWeight: 'bold'}}>{name}</Text>
+              <Text>by {author}</Text>
+          </View>
+      </TouchableOpacity>
+    );
+}
+
+function RDPD({navigation}) {
+    return (
+      <View style={{padding: 20}}>
+          <View style={{justifyContent: 'space-between', flexDirection: 'row'}}>
+              <TouchableOpacity onPress={() => {navigation.navigate(BookPresent)}}>
+                  <Image source={require("./Image/previous.png")} style={{height: 35, width: 35}}/>
+              </TouchableOpacity>
+              <Text style={{fontSize: 22, fontWeight: 'bold'}}>Rich Dad Poor Dad</Text>
+          </View>
+          <Text style={{fontSize: 16}}>
+              Rich Dad Poor Dad is Robert's story of growing up with two dads —
+              his real father and the father of his best friend, his rich dad —
+              and the ways in which both men shaped his thoughts about money and investing.
+              The book explodes the myth that you need to earn a high income to be rich and
+              explains the difference between working for money and having your money work for you.
+          </Text>
+          <Spacer height={10}/>
+          <Image source={{uri:"https://img.poki.com/cdn-cgi/image/quality=78,width=600,height=600,fit=cover,f=auto/d2fd6cbb32432311f93bc729a65c7fb0.png"}}
+                style={{height: "55%", width: "100%"}}
+          />
+      </View>
+    );
+}
+
+function Meditation({navigation}) {
+    return (
+      <View style={{padding: 20}}>
+          <View style={{justifyContent: 'space-between', flexDirection: 'row'}}>
+              <TouchableOpacity onPress={() => {navigation.navigate(BookPresent)}}>
+                  <Image source={require("./Image/previous.png")} style={{height: 35, width: 35}}/>
+              </TouchableOpacity>
+              <Text style={{fontSize: 22, fontWeight: 'bold'}}>Rich Dad Poor Dad</Text>
+          </View>
+          <Text style={{fontSize: 16}}>
+              Meditations is perhaps the only document of its kind ever made.
+              It is the private thoughts of the world’s most powerful man giving advice
+              to himself on how to make good on the responsibilities and obligations of his positions.
+              Trained in Stoic philosophy, Marcus Aurelius stopped almost every night
+              to practice a series of spiritual exercises—reminders designed to make him humble,
+              patient, empathetic, generous, and strong in the face of whatever he was dealing with.
+          </Text>
+          <Spacer height={10}/>
+          <Image source={{uri: "https://www.massagemag.com/wordpress/wp-content/uploads/Meditation_Practice.jpg"}}
+                style={{height: "50%", width: "100%"}}
+          />
+
+      </View>
+    );
+}
+
+//Spcaer
+
+function Spacer({height= 50}) {
+    return (
+        <View style={{marginTop: height}}/>
+    );
+}
+
+// App
+
+export default function App() {
+    return (
+        <NavigationContainer>
+            <Drawer.Navigator initialRouteName="Home">
+                <Drawer.Screen name="Home" component={HomeScreen} options={styles.headerEdit}/>
+                <Drawer.Screen name={"Cars"} component={Cars} options={styles.headerEdit}/>
+                <Drawer.Screen name={"Books"} component={Books} options={styles.headerEdit}/>
+            </Drawer.Navigator>
+        </NavigationContainer>
+    );
+}
+
+//Styles
+
+const styles = StyleSheet.create({
+    homeScreen: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: "10%",
+    },
+
+    CarScreen: {
+        flex: 1,
+        backgroundColor: 'gray',
+        alignItems: 'center',
+        padding: 20,
+    },
+
+    carPhoto: {
+        height: "100%",
+        width: "100%",
+        borderRadius: 25,
+    },
+
+    carSpecs: {
+        height: "60%",
+        width: "100%",
+        justifyContent: 'space-between',
+        flexDirection: 'row',
+    },
+
+    carTab: {
+        headerShown: false,
+        tabBarIcon: ({ tintColor }) => (
+            <Icon name="car" size={25} color="green" />
+        ),
+
+    },
+
+    bookMain: {
+        flex: 1,
+        backgroundColor: "gray",
+        alignItems: "center",
+    },
+
+    bookBoxEdit: {
+        height: "25%",
+        width: "90%",
+        backgroundColor: 'white',
+        borderRadius: 25,
+        alignItems: 'center',
+        flexDirection: "row",
+        justifyContent: "space-between",
+        padding: 10,
+    },
+
+    bookBoxPhoto: {
+        height: "100%",
+        width: "35%",
+        justifyContent: "center",
+        alignItems: "center",
+    },
+
+    bookPhoto: {
+        height: "100%",
+        width: "100%",
+        borderRadius: 25,
+        resizeMode: "stretch",
+    },
+
+    bookBoxDescription: {
+        height: "100%",
+        width: "60%",
+        justifyContent: "center",
+        alignItems: "center",
+    },
+
+    headerEdit: {
+        headerTintColor: 'green',
+        headerStyle: {
+            backgroundColor: '#64aaf5',
+        },
+    },
+    tabBarEdit: {
+        activeTintColor: 'white',
+        inactiveTintColor: 'white',
+        activeBackgroundColor: '#0f81fa',
+        inactiveBackgroundColor: '#64aaf5',
+        style: {
+            backgroundColor: '#CE4418',
+        }
+    },
+});
